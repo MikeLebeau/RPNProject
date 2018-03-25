@@ -1,8 +1,9 @@
 package rpn;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Created by LEBEAU Mike
@@ -11,29 +12,24 @@ import org.junit.rules.ExpectedException;
  */
 public class TestError {
 
-    @Rule
-    public ExpectedException expectedEx = ExpectedException.none();
-
     @Test
     public void TestWithAnEmptyInput(){
-        expectedEx.expect(UnsupportedOperationException.class);
-        expectedEx.expectMessage("Please check your input, only numbers, '+', '-', '*' and '/' are accepted.");
-        RPNCalculator.RpnCalculate("");
+        Throwable throwable = assertThrows(UnsupportedOperationException.class, () -> RPNCalculator.RpnCalculate(""));
+        assertEquals("Please check your input, only numbers, '+', '-', '*' and '/' are accepted.", throwable.getMessage());
     }
-
-    @Test
-    public void TestWithOneFogottenOperator(){
-        expectedEx.expect(UnsupportedOperationException.class);
-        expectedEx.expectMessage("Please check your input, We think you forgot one opertor or one number.");
-        RPNCalculator.RpnCalculate("5 2 3 +");
-    }
-
 
     @Test
     public void TestDivisionByZero(){
-        expectedEx.expect(ArithmeticException.class);
-        expectedEx.expectMessage("Divide by zero is denied !");
-        RPNCalculator.RpnCalculate("5 0 /");
+        Throwable throwable = assertThrows(ArithmeticException.class, () -> RPNCalculator.RpnCalculate("5 0 /"));
+        assertEquals("Divide by zero is denied !", throwable.getMessage());
     }
 
+    /**
+     * If they are no operators, it return the last num
+     */
+    @Test
+    public void TestWithNoOperator(){
+        long result = RPNCalculator.RpnCalculate("5 2 5 4");
+        assertEquals(4L, result);
+    }
 }

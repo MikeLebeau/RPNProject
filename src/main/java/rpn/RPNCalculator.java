@@ -12,8 +12,6 @@ public class RPNCalculator {
     public static long RpnCalculate(String exp){
 
         Stack<Integer> numStack = new Stack<>();
-        Stack<Operator> opStack = new Stack<>();
-        long result = 0;
 
         for (String s : exp.split(" ")) {
             if(NumberUtils.isNumber(s)){
@@ -30,10 +28,6 @@ public class RPNCalculator {
             }else{
                 throw new UnsupportedOperationException("Please check your input, only numbers, '+', '-', '*' and '/' are accepted.");
             }
-        }
-
-        if(opStack.size() != numStack.size()-1){
-            throw new UnsupportedOperationException("Please check your input, We think you forgot one opertor or one number.");
         }
 
         return numStack.pop();
