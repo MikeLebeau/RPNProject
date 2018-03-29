@@ -1,7 +1,13 @@
 package rpn;
 
 import org.apache.commons.lang.math.NumberUtils;
+import rpn.Operators.Divide;
+import rpn.Operators.Minus;
+import rpn.Operators.Multiply;
+import rpn.Operators.Plus;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -9,22 +15,40 @@ import java.util.Stack;
  */
 public class RPNCalculator {
 
-    public static long RpnCalculate(String exp){
+    private Map<String, IOperator> map;
 
         Stack<Integer> numStack = new Stack<>();
+    private Map<String, IOperator> setAllOperators(){
+        map = new HashMap<>();
 
-        for (String s : exp.split(" ")) {
+        map.put("+", new Plus());
+        map.put("-", new Minus());
+        map.put("*", new Multiply());
+        map.put("/", new Divide());
+
+        return map;
+    }
+
+
+    public long rpnCalculate(String exp){
+
+        setAllOperators();
+
+        Stack<Long> numStack = new Stack<>();
+
+
+        for (String s : exp.split("[ ]+")) {
             if(NumberUtils.isNumber(s)){
-                numStack.push(Integer.parseInt(s));
+                numStack.push(Long.parseLong(s));
             }else if(Operator.findByValue(s) != null){
                 if(numStack.size() == 1){
                     return numStack.pop();
                 }
 
-                int num2 = numStack.pop();
-                int num1 = numStack.pop();
+                long num2 = numStack.pop();
+                long num1 = numStack.pop();
 
-                numStack.push(calculate(Operator.findByValue(s), num1, num2));
+                numStack.push(calculate(map.get(s), num1, num2));
             }else{
                 throw new UnsupportedOperationException("Please check your input, only numbers, '+', '-', '*' and '/' are accepted.");
             }
@@ -33,22 +57,7 @@ public class RPNCalculator {
         return numStack.pop();
     }
 
-    private static int calculate(Operator op, int num1, int num2){
-        switch (op){
-            case Plus:
-                return num1 + num2;
-            case Minus:
-                return num1 - num2;
-            case Multiply:
-                return num1 * num2;
-            case Divide:
-                if(num2 == 0){
-                    throw new ArithmeticException("Divide by zero is denied !");
-                }
-                return num1 / num2;
-            default:
-                // By default, but already catched in first for block...
-                throw new UnsupportedOperationException("Unknown operator/character.");
-        }
+    private static long calculate(IOperator op, long num1, long num2){
+        return op.calculate(num1, num2);
     }
 }

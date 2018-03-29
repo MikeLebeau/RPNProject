@@ -13,6 +13,6 @@ public class CLI {
     }
 
     static long evaluate(String expression) {
-        return RPNCalculator.RpnCalculate(expression);
+        return new RPNCalculator().rpnCalculate(expression);
     }
 }

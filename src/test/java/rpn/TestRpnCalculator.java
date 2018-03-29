@@ -21,7 +21,7 @@ public class TestRpnCalculator {
             "'20 5 *', 100",
             "'20 5 /', 4"})
     public void TestBasic(String exp, long res){
-        long result = RPNCalculator.RpnCalculate(exp);
+        long result = new RPNCalculator().rpnCalculate(exp);
         assertEquals(res, result);
     }
 
@@ -41,7 +41,7 @@ public class TestRpnCalculator {
             "'3 7 5 8 * + *', 141"
     })
     public void TestComplex(String exp, long res){
-        long result = RPNCalculator.RpnCalculate(exp);
+        long result = new RPNCalculator().rpnCalculate(exp);
         assertEquals(res, result);
     }
 }

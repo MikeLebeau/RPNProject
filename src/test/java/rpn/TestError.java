@@ -29,7 +29,7 @@ public class TestError {
      */
     @Test
     public void TestWithNoOperator(){
-        long result = RPNCalculator.RpnCalculate("5 2 5 4");
+        long result = new RPNCalculator().rpnCalculate("5 2 5 4");
         assertEquals(4L, result);
     }
 }
