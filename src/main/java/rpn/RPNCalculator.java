@@ -1,10 +1,7 @@
 package rpn;
 
 import org.apache.commons.lang.math.NumberUtils;
-import rpn.Operators.Divide;
-import rpn.Operators.Minus;
-import rpn.Operators.Multiply;
-import rpn.Operators.Plus;
+import rpn.Operators.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +21,7 @@ public class RPNCalculator {
         map.put("-", new Minus());
         map.put("*", new Multiply());
         map.put("/", new Divide());
+        map.put("%", new Modulo());
 
         return map;
     }

@@ -19,7 +19,8 @@ public class TestRpnCalculator {
             "'20 5 +', 25",
             "'20 5 -', 15",
             "'20 5 *', 100",
-            "'20 5 /', 4"})
+            "'20 5 /', 4",
+            "'20 5 %', 0"})
     public void TestBasic(String exp, long res){
         long result = new RPNCalculator().rpnCalculate(exp);
         assertEquals(res, result);
