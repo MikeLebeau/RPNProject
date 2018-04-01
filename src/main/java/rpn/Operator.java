@@ -3,6 +3,7 @@ package rpn;
 /**
  * Created by Miky on 04/03/2018.
  */
+@Deprecated
 public enum Operator {
 
     Plus("+"),

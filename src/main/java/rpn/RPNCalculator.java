@@ -17,7 +17,6 @@ public class RPNCalculator {
 
     private Map<String, IOperator> map;
 
-        Stack<Integer> numStack = new Stack<>();
     private Map<String, IOperator> setAllOperators(){
         map = new HashMap<>();
 
@@ -36,11 +35,10 @@ public class RPNCalculator {
 
         Stack<Long> numStack = new Stack<>();
 
-
         for (String s : exp.split("[ ]+")) {
             if(NumberUtils.isNumber(s)){
                 numStack.push(Long.parseLong(s));
-            }else if(Operator.findByValue(s) != null){
+            }else if(map.get(s) != null){
                 if(numStack.size() == 1){
                     return numStack.pop();
                 }
