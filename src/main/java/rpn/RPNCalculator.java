@@ -44,16 +44,13 @@ public class RPNCalculator {
                 long num2 = numStack.pop();
                 long num1 = numStack.pop();
 
-                numStack.push(calculate(map.get(s), num1, num2));
+//                numStack.push(calculate(map.get(s), num1, num2));
+                numStack.push(map.get(s).calculate(num1, num2));
             }else{
-                throw new UnsupportedOperationException("Please check your input, only numbers, '+', '-', '*' and '/' are accepted.");
+                throw new UnsupportedOperationException("Please check your input, only numbers, '+', '-', '*', '/' and '%' are accepted.");
             }
         }
 
         return numStack.pop();
-    }
-
-    private static long calculate(IOperator op, long num1, long num2){
-        return op.calculate(num1, num2);
     }
 }
