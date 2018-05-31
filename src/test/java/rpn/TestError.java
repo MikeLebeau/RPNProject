@@ -18,7 +18,7 @@ public class TestError {
     @ValueSource(strings = {"", "5;2;5;4"})
     public void TestWithAnEmptyInput(String exp){
         Throwable throwable = assertThrows(UnsupportedOperationException.class, () -> new RPNCalculator().rpnCalculate(exp));
-        assertEquals("Please check your input, only numbers, '+', '-', '*' and '/' are accepted.", throwable.getMessage());
+        assertEquals("Please check your input, only numbers, '+', '-', '*', '/' and '%' are accepted.", throwable.getMessage());
     }
 
     @Test
