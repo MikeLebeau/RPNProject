@@ -1,4 +1,4 @@
-package rpn.Operators;
+package rpn.operators;
 
 import rpn.IOperator;
 

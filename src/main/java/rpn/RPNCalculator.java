@@ -1,7 +1,7 @@
 package rpn;
 
 import org.apache.commons.lang.math.NumberUtils;
-import rpn.Operators.*;
+import rpn.operators.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,22 +14,22 @@ public class RPNCalculator {
 
     private Map<String, IOperator> map;
 
-    private Map<String, IOperator> setAllOperators(){
-        map = new HashMap<>();
-
-        map.put("+", new Plus());
-        map.put("-", new Minus());
-        map.put("*", new Multiply());
-        map.put("/", new Divide());
-        map.put("%", new Modulo());
-
-        return map;
-    }
+//    private Map<String, IOperator> setAllOperators(){
+//        map = new HashMap<>();
+//
+//        map.put("+", new Plus());
+//        map.put("-", new Minus());
+//        map.put("*", new Multiply());
+//        map.put("/", new Divide());
+//        map.put("%", new Modulo());
+//
+//        return map;
+//    }
 
 
     public long rpnCalculate(String exp){
 
-        setAllOperators();
+//        setAllOperators();
 
         Stack<Long> numStack = new Stack<>();
 
@@ -44,7 +44,6 @@ public class RPNCalculator {
                 long num2 = numStack.pop();
                 long num1 = numStack.pop();
 
-//                numStack.push(calculate(map.get(s), num1, num2));
                 numStack.push(map.get(s).calculate(num1, num2));
             }else{
                 throw new UnsupportedOperationException("Please check your input, only numbers, '+', '-', '*', '/' and '%' are accepted.");
