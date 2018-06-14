@@ -19,6 +19,5 @@ public class TokenEvent implements IEvent {
     @Override
     public Class<? extends IEvent> getType() {
         return getClass();
-
     }
 }

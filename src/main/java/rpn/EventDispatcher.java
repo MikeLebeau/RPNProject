@@ -19,8 +19,8 @@ public class EventDispatcher{
     }
 
     public void dispatch(IEvent event){
-        if(event.getClass() == null){
-            throw new UnsupportedOperationException("Il n'y a pas de Handler pour cet Event");
+        if(event.getType() == null){
+            throw new UnsupportedOperationException("Il n'y a pas de Handler pour cet Event, " + event.getType());
         }
 
         handlers.get(event.getClass()).execEvent(event);

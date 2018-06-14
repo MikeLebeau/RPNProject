@@ -24,5 +24,8 @@ public class InputHandler implements IHandlers {
         for (String s : event.getText().split("[ ]+")) {
             eventDispatcher.dispatch(new TokenEvent(s));
         }
+
+        // EOE => End Of Expression
+        eventDispatcher.dispatch(new TokenEvent("EOE"));
     }
 }

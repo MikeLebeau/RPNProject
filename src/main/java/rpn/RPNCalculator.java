@@ -1,6 +1,12 @@
 package rpn;
 
 import org.apache.commons.lang.math.NumberUtils;
+import rpn.events.InputEvent;
+import rpn.events.ReturnEvent;
+import rpn.events.TokenEvent;
+import rpn.handlers.InputHandler;
+import rpn.handlers.ReturnHandler;
+import rpn.handlers.TokenHandler;
 import rpn.operators.*;
 
 import java.util.HashMap;
@@ -14,6 +20,25 @@ public class RPNCalculator {
 
     private Map<String, IOperator> map;
 
+    //TODO Trouver une meilleure facon de retourner le resultat
+    public static Long result;
+
+    public long rpnCalculate(String exp){
+        EventDispatcher dispatcher = new EventDispatcher();
+
+        InputHandler inputHandler = new InputHandler(dispatcher);
+        ReturnHandler returnHandler = new ReturnHandler(dispatcher);
+        TokenHandler tokenHandler = new TokenHandler(dispatcher);
+
+        dispatcher.registerHandler(InputEvent.class, inputHandler);
+        dispatcher.registerHandler(ReturnEvent.class, returnHandler);
+        dispatcher.registerHandler(TokenEvent.class, tokenHandler);
+
+        dispatcher.dispatch(new InputEvent(exp));
+
+        return result;
+    }
+
 //    private Map<String, IOperator> setAllOperators(){
 //        map = new HashMap<>();
 //
@@ -26,8 +51,13 @@ public class RPNCalculator {
 //        return map;
 //    }
 
-
-    public long rpnCalculate(String exp){
+    /**
+     * Deprecated due to the Event Driven TP
+     * @param exp
+     * @return
+     */
+    @Deprecated
+    public long rpnCalculateOld(String exp){
 
 //        setAllOperators();
 

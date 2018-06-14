@@ -1,6 +1,8 @@
 package rpn.handlers;
 
+import rpn.CLI;
 import rpn.EventDispatcher;
+import rpn.RPNCalculator;
 import rpn.events.IEvent;
 import rpn.events.InputEvent;
 import rpn.events.ReturnEvent;
@@ -15,13 +17,12 @@ public class ReturnHandler implements IHandlers{
 
     @Override
     public void execEvent(IEvent iEvent) {
-        if(iEvent.getType() != InputEvent.class){
+        if(iEvent.getType() != ReturnEvent.class){
             throw new UnsupportedOperationException("L'Event ne correspond pas a ce Handler");
         }
 
         ReturnEvent event = (ReturnEvent) iEvent;
-        System.out.println("4 - Je suis dans le onEvent de ReturnHandler");
-        System.out.println("  - iEvent type : " + iEvent.getClass());
-        System.out.println("  - event type : " + event.getText() );
+        System.out.println("Le resultat : " + event.getResult());
+        RPNCalculator.result = event.getResult();
     }
 }

@@ -5,7 +5,7 @@ public class InputEvent implements IEvent {
     private String text;
 
     public InputEvent(String text) {
-        this.text = "InputEvent : " + text;
+        this.text = text;
     }
 
     public String getText() {

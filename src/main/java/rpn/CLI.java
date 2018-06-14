@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CLI {
+
+
+
     public static final void main(String[] args) {
         String expression = Stream.of(args).collect(Collectors.joining(" "));
 
@@ -20,19 +23,6 @@ public class CLI {
     }
 
     static long evaluate(String expression) {
-//        return new RPNCalculator().rpnCalculate(expression);
-        EventDispatcher dispatcher = new EventDispatcher();
-
-        InputHandler inputHandler = new InputHandler(dispatcher);
-        ReturnHandler returnHandler = new ReturnHandler(dispatcher);
-        TokenHandler tokenHandler = new TokenHandler(dispatcher);
-
-        dispatcher.registerHandler(InputEvent.class, inputHandler);
-        dispatcher.registerHandler(ReturnEvent.class, returnHandler);
-        dispatcher.registerHandler(TokenEvent.class, tokenHandler);
-
-        dispatcher.dispatch(new InputEvent(expression));
-
-        return 0L;
+        return new RPNCalculator().rpnCalculate(expression);
     }
 }

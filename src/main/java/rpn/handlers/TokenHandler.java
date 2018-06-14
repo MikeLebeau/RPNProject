@@ -55,8 +55,12 @@ public class TokenHandler implements IHandlers {
             long num1 = numStack.pop();
 
             numStack.push(map.get(token).calculate(num1, num2));
+        }else if("EOE".equals(token)){
+            if(numStack.size() == 0){
+                throw new UnsupportedOperationException("Please check your input, only numbers, '+', '-', '*', '/' and '%' are accepted.");
+            }
+            eventDispatcher.dispatch(new ReturnEvent(numStack.pop()));
         }
 
-        eventDispatcher.dispatch(new ReturnEvent(numStack.pop()));
     }
 }
